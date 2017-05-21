@@ -1,0 +1,22 @@
+{
+  "name": "partial.lenses.builder",
+  "version": "0.1.0",
+  "description": "Alternative syntax for partial.lenses using ES2015 Proxy",
+  "main": "dist/index.js",
+  "author": "Paavo Huhtala",
+  "license": "MIT",
+  "dependencies": {
+    "partial.lenses": "^11.7.1",
+    "ramda": "^0.23.0"
+  },
+  "scripts": {
+    "build": "babel src -d dist",
+    "test": "babel src -d dist && babel test -d dist-test && mocha ./dist-test/index.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "mocha": "^3.4.1"
+  }
+}

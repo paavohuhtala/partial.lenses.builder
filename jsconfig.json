@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "lib": [ "es2017" ]
+  },
+  "typeAcquisition": {
+    "enable": true
+  }
+}
