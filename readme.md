@@ -8,46 +8,46 @@ This is just a prototype; I've not even used it beyond simple experimentation.
 This is what it looks like:
 
 ```js
-    import L  from "partial.lenses"
-    import LB from "partial.lenses.builder"
+import L  from "partial.lenses"
+import LB from "partial.lenses.builder"
 
-    const products = [
-      {
-        id: 1,
-        name: "SuperCool 9001",
-        dimensions: { width: 1.5, height: 2.5, weight: 400 }
-      },
-      {
-        id: 2,
-        name: "AlmostAsCool 9000",
-        dimensions: { width: 1.2, height: 1.9, weight: 370 }
-      }
-    ]
+const products = [
+  {
+    id: 1,
+    name: "SuperCool 9001",
+    dimensions: { width: 1.5, height: 2.5, weight: 400 }
+  },
+  {
+    id: 2,
+    name: "AlmostAsCool 9000",
+    dimensions: { width: 1.2, height: 1.9, weight: 370 }
+  }
+]
 
-    // Equivalent to [0, "dimensions", "weight"]
-    const product1WeightL = LB[0].dimensions.weight._
-    // Equivalent to [1, "name"]
-    const product2NameL = LB[1].name._
+// Equivalent to [0, "dimensions", "weight"]
+const product1WeightL = LB[0].dimensions.weight._
+// Equivalent to [1, "name"]
+const product2NameL = LB[1].name._
 
-    // Works with normal partial.lenses functions
-    let modifiedProducts = L.modify(product1WeightL, x => x + 1, products)
-    modifiedProducts = L.set(product2NameL, "TheCoolest 9002", modifiedProducts)
+// Works with normal partial.lenses functions
+let modifiedProducts = L.modify(product1WeightL, x => x + 1, products)
+modifiedProducts = L.set(product2NameL, "TheCoolest 9002", modifiedProducts)
 
-    // Can be composed with L.compose or array spread operator
-    const product2L = LB[1]._
-    const productWeightL = LB.dimensions.weight._
-    const product2WeightL = [...product2L, ...productWeightL]
-    L.get(product2WeightL, products)
+// Can be composed with L.compose or array spread operator
+const product2L = LB[1]._
+const productWeightL = LB.dimensions.weight._
+const product2WeightL = [...product2L, ...productWeightL]
+L.get(product2WeightL, products)
 ```
 
 Additionally, you can avoid the `_` by importing an augmented ("lifted") version of `L` from this module.
 
 ```js
-  import { LB, L } from "partial.lenses.builder"
+import { LB, L } from "partial.lenses.builder"
 
-  // (using the same data as before)
-  L.get(LB[0].dimensions.weight, products)
-  L.set(LB[1].id, 12e10, products)
+// (using the same data as before)
+L.get(LB[0].dimensions.weight, products)
+L.set(LB[1].id, 12e10, products)
 ```
 
 The implementation is under 10 lines of code, see [`index.js`](src/index.js).
